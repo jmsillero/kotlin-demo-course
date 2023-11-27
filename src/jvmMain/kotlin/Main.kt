@@ -17,7 +17,7 @@ import androidx.compose.ui.window.application
 @Composable
 @Preview
 fun App() = with(AppState) {
-    val items = state.value.notes
+    val items = state.notes
 
     if (items == null) {
         LaunchedEffect(true) {
@@ -28,7 +28,7 @@ fun App() = with(AppState) {
 
     MaterialTheme {
         Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize()) {
-            if (state.value.loading) {
+            if (state.loading) {
                 CircularProgressIndicator()
             } else {
                 items?.let {

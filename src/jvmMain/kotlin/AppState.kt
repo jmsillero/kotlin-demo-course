@@ -1,15 +1,15 @@
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import kotlin.concurrent.thread
 
 object AppState {
-    val state = mutableStateOf(
-        UiState()
-    )
+    var state by mutableStateOf(UiState())
 
     fun loadNotes() {
         thread {
-            state.update { UiState(loading = true) }
-            getNotes { state.value = UiState(it, false) }
+            state = UiState(loading = true)
+            getNotes { state = UiState(it, false) }
 
         }
     }
