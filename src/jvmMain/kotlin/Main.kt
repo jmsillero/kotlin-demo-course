@@ -16,24 +16,24 @@ import androidx.compose.ui.window.application
 
 @Composable
 @Preview
-fun App(appState: AppState) {
+fun App(appState: AppState) = with(appState) {
+    val items = state.value.notes
 
-    if (appState.state.value.notes == null) {
-
+    if (items == null) {
         LaunchedEffect(true) {
             appState.loadNotes()
         }
     }
 
-    val items = appState.state.value.notes
+
     MaterialTheme {
         Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize()) {
             if (appState.state.value.loading) {
                 CircularProgressIndicator()
             } else {
-                appState.state.value.notes?.let {
+                items?.let {
                     NotesList(it)
-                }
+                } ?: Box{}
             }
         }
     }
