@@ -1,7 +1,7 @@
 import androidx.compose.runtime.mutableStateOf
 import kotlin.concurrent.thread
 
-class AppState {
+object AppState {
     val state = mutableStateOf(
         UiState()
     )
@@ -18,4 +18,12 @@ class AppState {
         val notes: List<Note>? = null,
         val loading: Boolean = false
     )
+
+    //Companion objet, is like static functions or values
+    //We can only create a companion object per class
+//    companion object MyObjectName {
+//        fun foo() {
+//            println("Im a companion obj")
+//        }
+//    }
 }

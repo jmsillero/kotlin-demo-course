@@ -16,24 +16,24 @@ import androidx.compose.ui.window.application
 
 @Composable
 @Preview
-fun App(appState: AppState) = with(appState) {
+fun App() = with(AppState) {
     val items = state.value.notes
 
     if (items == null) {
         LaunchedEffect(true) {
-            appState.loadNotes()
+            loadNotes()
         }
     }
 
 
     MaterialTheme {
         Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize()) {
-            if (appState.state.value.loading) {
+            if (state.value.loading) {
                 CircularProgressIndicator()
             } else {
                 items?.let {
                     NotesList(it)
-                } ?: Box{}
+                } ?: Box {}
             }
         }
     }
@@ -41,6 +41,10 @@ fun App(appState: AppState) = with(appState) {
 
 @Composable
 fun NotesList(items: List<Note>) {
+
+//    AppState.foo()
+
+
     LazyColumn(modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
         items(items) { note ->
             Card(
@@ -62,11 +66,12 @@ fun NotesList(items: List<Note>) {
 }
 
 fun main() {
-    val appState = AppState()
+
+
     application {
 
         Window(onCloseRequest = ::exitApplication) {
-            App(appState)
+            App()
         }
     }
 }
