@@ -19,9 +19,10 @@ import androidx.compose.ui.window.application
 fun App() = with(AppState) {
     val items = state.notes
 
+
     if (items == null) {
         LaunchedEffect(true) {
-            loadNotes()
+            loadNotes(this)
         }
     }
 
